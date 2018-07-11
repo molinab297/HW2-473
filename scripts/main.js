@@ -5,6 +5,8 @@ var THUMBNAIL_LINK_SELECTOR = '[data-image-role="trigger"]';
 var HIDDEN_DETAIL_CLASS = 'hidden-detail';
 var TINY_EFFECT_CLASS = 'is-tiny';
 var ESC_KEY = 27;
+var INDEX = 0;
+var SIZE_LI = 0;
 
 function setDetails(imageUrl, titleText) {
   'use strict';
@@ -27,6 +29,7 @@ function titleFromThumb(thumbnail) {
 
 function setDetailsFromThumb(thumbnail) {
   'use strict';
+  INDEX = parseInt(thumbnail.getAttribute('index'));
   setDetails(imageFromThumb(thumbnail), titleFromThumb(thumbnail));
 }
 
@@ -75,8 +78,21 @@ function addKeyPressHandler() {
 function initializeEvents() {
   'use strict';
   var thumbnails = getThumbnailsArray();
+  SIZE_LI = document.getElementById("main_ul").getElementsByTagName("li").length;
   thumbnails.forEach(addThumbClickHandler);
   addKeyPressHandler();
 }
 
 initializeEvents();
+
+function goLeft() {
+  INDEX = (INDEX == 0) ? 0 : INDEX - 1;
+  var thumbnail = getThumbnailsArray()[INDEX];
+  setDetails(imageFromThumb(thumbnail), titleFromThumb(thumbnail));
+}
+
+function goRight() {
+  INDEX++;
+  var thumbnail = getThumbnailsArray()[INDEX % SIZE_LI];
+  setDetails(imageFromThumb(thumbnail), titleFromThumb(thumbnail));
+}
