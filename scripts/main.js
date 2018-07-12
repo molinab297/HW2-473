@@ -78,7 +78,7 @@ function addKeyPressHandler() {
 function initializeEvents() {
   'use strict';
   var thumbnails = getThumbnailsArray();
-  SIZE_LI = document.getElementById("main_ul").getElementsByTagName("li").length;
+  SIZE_LI = document.getElementById("main_ul").getElementsByTagName("li").length - 1;
   thumbnails.forEach(addThumbClickHandler);
   addKeyPressHandler();
 }
@@ -92,7 +92,7 @@ function goLeft() {
 }
 
 function goRight() {
-  INDEX++;
-  var thumbnail = getThumbnailsArray()[INDEX % SIZE_LI];
+  INDEX = (INDEX == SIZE_LI) ? SIZE_LI : INDEX + 1;
+  var thumbnail = getThumbnailsArray()[INDEX];
   setDetails(imageFromThumb(thumbnail), titleFromThumb(thumbnail));
 }
