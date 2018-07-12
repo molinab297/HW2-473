@@ -77,6 +77,8 @@ function addKeyPressHandler() {
 
 function initializeEvents() {
   'use strict';
+  document.getElementById("previous").innerHTML = "<";
+  document.getElementById("next").innerHTML = ">";
   var thumbnails = getThumbnailsArray();
   SIZE_LI = document.getElementById("main_ul").getElementsByTagName("li").length - 1;
   thumbnails.forEach(addThumbClickHandler);
